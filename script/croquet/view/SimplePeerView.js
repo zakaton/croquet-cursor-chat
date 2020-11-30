@@ -94,26 +94,28 @@ class SimplePeerView extends Croquet.View {
         this.peer.signal(data)
     }
     update () {
-        this.matrix4.identity()
-
-        const {innerWidth, innerHeight} = window
-        let x = this.userModel.mouse.position.x / innerWidth
-        x *= 10
-        x -= 5
-
-        let y = this.userModel.mouse.position.y / innerHeight
-        y *= 10
-        y -= 5
-
-        this.matrix4.setPosition(x, -y, -5)
-
-        if (false) {
-            this.euler.copy(this.userModel.orientation)
-            this.euler.y += (Math.PI/2)
-            this.matrix4.makeRotationFromEuler(this.euler)
+        if (this.myType === 'extension') {
+            this.matrix4.identity()
+    
+            const {innerWidth, innerHeight} = window
+            let x = this.userModel.mouse.position.x / innerWidth
+            x *= 5
+            x -= 2.5
+    
+            let y = this.userModel.mouse.position.y / innerHeight
+            y *= 5
+            y -= 2.5
+    
+            this.matrix4.setPosition(x, -y, -2)
+    
+            if (false) {
+                this.euler.copy(this.userModel.orientation)
+                this.euler.y += (Math.PI/2)
+                this.matrix4.makeRotationFromEuler(this.euler)
+            }
+    
+            this.source.setFromMatrix(this.matrix4)
         }
-
-        this.source.setFromMatrix(this.matrix4)
     }
     disconnect () {
         console.log('peer disconnect')

@@ -191,12 +191,15 @@ class ExtensionView extends View {
         //         }, 1000 / 12, 'set-position')
         //     }
         // }
-
-        this.matrix4.makeRotationFromEuler(this.user.model.orientation)
-        this.resonanceAudioScene.setListenerFromMatrix(this.matrix4)
+        
         this.widgets.forEach(widget => widget.update())
 
         super.update()
+    }
+
+    didSetOrientation () {
+        this.matrix4.makeRotationFromEuler(this.user.model.orientation)
+        this.resonanceAudioScene.setListenerFromMatrix(this.matrix4)
     }
 
     onJoin () {
@@ -208,11 +211,11 @@ class ExtensionView extends View {
         }
 
         this.resonanceAudioScene = window.resonanceAudioScene = new ResonanceAudio(this.audioContext)
-        if (false) {
-            const material = 'brick-bare'
+        if (true) {
+            const material = 'acoustic-ceiling-tiles'
             this.resonanceAudioScene.setRoomProperties({
-                width: 10,
-                height: 10,
+                width: 5,
+                height: 5,
                 depth: 10,
             }, {
                 left: material,
@@ -233,6 +236,8 @@ class ExtensionView extends View {
         })
 
         this.model.widgets.forEach(widget => this.didAddWidget(widget.id))
+
+        this.subscribe(this.username, 'did-set-orientation', this.didSetOrientation)
     }
 
     onUserJoin (username) {
