@@ -53,7 +53,8 @@ class ExtensionView extends View {
         })
 
         window.addEventListener('wheel', event => {
-            const {x, y} = event
+            const x = window.scrollX
+            const y = window.scrollY
             this.setThrottle(() => {
                 this.publish(this.sessionId, 'set-scroll', {x, y, username: this.username})
             }, 1000 / 12, 'set-scroll')

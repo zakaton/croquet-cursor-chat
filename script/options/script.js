@@ -148,7 +148,7 @@ const orientation = new THREE.Euler()
 orientation.order = 'YXZ'
 
 tf.setBackend('webgl')
-if (!false)
+if (false)
 tf.ready().then(() => {
     facemesh.load({maxFaces: 1}).then(facemeshModel => {
         function facemeshAnimationFrame () {
