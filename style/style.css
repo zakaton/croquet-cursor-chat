@@ -66,6 +66,8 @@
     overflow: none;
 
     box-shadow: 1px 1px 7px 0px black;
+
+    line-height: 1 !important;
 }
 
 .croquet-cursor-chat.chat .messages {
@@ -73,7 +75,10 @@
 }
 
 .croquet-cursor-chat.chat input {
-    width: 240px;
+    width: 220px;
+}
+.croquet-cursor-chat.chat button {
+
 }
 
 .croquet-cursor-chat.chat .message span.username {
