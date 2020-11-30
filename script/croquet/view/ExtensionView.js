@@ -17,39 +17,7 @@ class ExtensionView extends View {
         this.matrix4 = new THREE.Matrix4()
 
         window.addEventListener('mousemove', event => {
-            const x = event.pageX
-            const y = event.pageY
-
-            if (this.user) {
-                this.user.cursorParent.style.left = `${x}px`
-                this.user.cursorParent.style.top = `${y}px`
-            }
-
-            if (this.user) {
-                const {clientX, clientY} = event
-                const {innerWidth, innerHeight} = window
-
-                if ((innerWidth - clientX) < 140) {
-                    this.user.cursorParent.classList.add('right')
-                }
-                else {
-                    this.user.cursorParent.classList.remove('right')
-                }
-
-                if ((innerHeight - clientY) < 180) {
-                    this.user.cursorParent.classList.add('bottom')
-                }
-                else {
-                    this.user.cursorParent.classList.remove('bottom')
-                }
-            }
-
-            this.setThrottle(() => {
-                this.publish(this.username, 'set-mouse-position', {
-                    x,
-                    y,
-                })
-            }, 1000 / 12, 'set-mouse-position')
+            this.onMouseMove(event)
         })
 
         window.addEventListener('wheel', event => {
@@ -58,6 +26,8 @@ class ExtensionView extends View {
             this.setThrottle(() => {
                 this.publish(this.sessionId, 'set-scroll', {x, y, username: this.username})
             }, 1000 / 12, 'set-scroll')
+
+            this.onMouseMove(event)
         })
         this.subscribe(this.sessionId, 'did-set-scroll', this.didSetScroll)
 
@@ -157,6 +127,42 @@ class ExtensionView extends View {
         this.subscribe(this.sessionId, 'did-remove-widget', this.didRemoveWidget)
 
         this.subscribe(this.sessionId, 'did-set-url', this.didSetUrl)
+    }
+
+    onMouseMove (event) {
+        const x = event.pageX
+        const y = event.pageY
+
+        if (this.user) {
+            this.user.cursorParent.style.left = `${x}px`
+            this.user.cursorParent.style.top = `${y}px`
+        }
+
+        if (this.user) {
+            const {clientX, clientY} = event
+            const {innerWidth, innerHeight} = window
+
+            if ((innerWidth - clientX) < 140) {
+                this.user.cursorParent.classList.add('right')
+            }
+            else {
+                this.user.cursorParent.classList.remove('right')
+            }
+
+            if ((innerHeight - clientY) < 180) {
+                this.user.cursorParent.classList.add('bottom')
+            }
+            else {
+                this.user.cursorParent.classList.remove('bottom')
+            }
+        }
+
+        this.setThrottle(() => {
+            this.publish(this.username, 'set-mouse-position', {
+                x,
+                y,
+            })
+        }, 1000 / 12, 'set-mouse-position')
     }
     
     didSetScroll (username) {
