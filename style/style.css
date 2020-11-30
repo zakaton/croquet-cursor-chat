@@ -1,6 +1,5 @@
 .croquet-cursor-chat.widget {
     position: absolute;
-    z-index: 100;
 
     top: 0;
     left: 0;
@@ -8,13 +7,14 @@
 
 .croquet-cursor-chat.cursor {
     position: absolute;
-    z-index: 100;
 
     top: 0;
     left: 0;
     
     user-select: none;
     pointer-events: none;
+
+    z-index: 100001;
 }
 
 .croquet-cursor-chat {
@@ -37,8 +37,6 @@
     box-shadow: 0 0 4px 1px black;
 
     transition: top 0.5s, left 0.5s;
-
-    z-index: 100001;
 }
 
 .croquet-cursor-chat.cursor.bottom .video {
