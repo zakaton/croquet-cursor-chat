@@ -28,8 +28,8 @@ class WidgetView extends Croquet.View {
 
         document.addEventListener('mousemove', event => {
             if (this.isMouseDown) {
-                const x = event.clientX
-                const y = event.clientY
+                const x = event.pageX
+                const y = event.pageY
                 this.setThrottle(() => {
                     this.publish(this.model.id, 'set-position', {x, y})
                 }, 1000 / 12, 'set-position')
