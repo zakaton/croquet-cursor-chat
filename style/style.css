@@ -84,6 +84,7 @@
 
 .croquet-cursor-chat.chat input {
     width: 220px;
+    padding: 0;
 }
 .croquet-cursor-chat.chat button {
 
