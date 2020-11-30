@@ -5,13 +5,13 @@ class TextWidgetModel extends WidgetModel {
         super.init(options)
 
         const {text} = options
-        this.text = text
+        this.text = text || ''
         this.subscribe(this.id, 'set-text', this.setText)
     }
 
-    setText (text) {
+    setText ({text, username}) {
         this.text = text
-        this.publish(this.id, 'did-set-text')
+        this.publish(this.id, 'did-set-text', username)
     }
 }
 TextWidgetModel.register('text-widget')

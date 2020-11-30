@@ -1,3 +1,11 @@
+.croquet-cursor-chat.widget {
+    position: absolute;
+    z-index: 100;
+
+    top: 0;
+    left: 0;
+}
+
 .croquet-cursor-chat.cursor {
     position: absolute;
     z-index: 100;
@@ -83,4 +91,38 @@
 
 .croquet-cursor-chat.chat .message span.username {
     font-weight: bold;
+}
+
+.croquet-cursor-chat.widget[data-type="text"] {
+    width: 250px;
+    height: 150px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px black;
+    overflow: hidden;
+}
+
+.croquet-cursor-chat.widget[data-type="text"] textarea {
+    width: 100%;
+    height: 100%;
+    resize: none;
+}
+
+.croquet-cursor-chat.widget[data-type="embed"] {
+    width: 500px;
+    height: 500px;
+
+    background-color: white;
+
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px black;
+
+    overflow: hidden;
+}
+
+.croquet-cursor-chat.widget[data-type="embed"] iframe {
+    width: 100%;
+    height: 490px;
+    bottom: 0;
+    position: absolute;
 }

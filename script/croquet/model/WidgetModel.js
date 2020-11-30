@@ -6,9 +6,7 @@ class WidgetModel extends Croquet.Model {
         super.init()
 
         this.type = type
-
-        const {x, y} = position
-        this.position = new THREE.Vector2(x, y)
+        this.position = position.clone()
         this.subscribe(this.id, 'set-position', this.setPosition)
     }
 

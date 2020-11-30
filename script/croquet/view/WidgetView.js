@@ -7,25 +7,29 @@ class WidgetView extends Croquet.View {
 
         this._throttles = {}
 
-        this.elementParent = document.createElement('div')
-        this.elementParent.classList.add('croquet-cursor-chat')
-        this.elementParent.innerHTML = `
-            <div class="widget"></div>
-        `
+        const [, myUsername, myType] = this.viewId.split('_')
+        this.myUsername = myUsername
+        this.myType = myType
+
+        this.element = document.createElement('div')
+        this.element.classList.add('croquet-cursor-chat')
+        this.element.classList.add('widget')
+        this.element.dataset.id = this.model.id
 
         this.isMouseDown = false
-        this.elementParent.addEventListener('mousedown', () => {
+        this.element.addEventListener('mousedown', () => {
             this.isMouseDown = true
-            this.elementParent.style.cursor = 'grabbing'
+            this.element.style.cursor = 'grabbing'
         })
         document.addEventListener('mouseup', () => {
             this.isMouseDown = false
-            this.elementParent.style.cursor = 'initial'
+            this.element.style.cursor = 'initial'
         })
 
-        this.elementParent.addEventListener('mousemove', event => {
+        document.addEventListener('mousemove', event => {
             if (this.isMouseDown) {
-                const {x, y} = event
+                const x = event.clientX
+                const y = event.clientY
                 this.setThrottle(() => {
                     this.publish(this.model.id, 'set-position', {x, y})
                 }, 1000 / 12, 'set-position')
@@ -33,15 +37,22 @@ class WidgetView extends Croquet.View {
         })
 
         this.isMouseInside = false
-        this.elementParent.addEventListener('mouseenter', () => {
+        this.element.addEventListener('mouseenter', () => {
             this.isMouseInside = true
         })
-        this.elementParent.addEventListener('mouseleave', () => {
+        this.element.addEventListener('mouseleave', () => {
             this.isMouseInside = false
         })
 
-        document.body.appendChild(this.elementParent)
+        document.body.appendChild(this.element)
         this.subscribe(this.model.id, 'did-set-position', this.didSetPosition)
+        this.didSetPosition()
+
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape') {
+                this.publish(this.sessionId, 'remove-widget', this.model.id)
+            }
+        })
     }
 
     setThrottle (callback, delay, name) {
@@ -64,12 +75,12 @@ class WidgetView extends Croquet.View {
     }
 
     didSetPosition () {
-        this.elementParent.style.left = this.model.position.x
-        this.elementParent.style.top = this.model.position.y
+        this.element.style.left = `${this.model.position.x}px`
+        this.element.style.top = `${this.model.position.y}px`
     }
 
     detach () {
-        this.elementParent.remove()
+        this.element.remove()
     }
 }
 

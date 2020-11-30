@@ -12,8 +12,6 @@ class ExtensionView extends View {
     constructor (model) {
         super(model)
 
-        this.widgets = []
-
         this.matrix4 = new THREE.Matrix4()
 
         window.addEventListener('mousemove', event => {
@@ -58,6 +56,7 @@ class ExtensionView extends View {
             if (data.croquet === 'croquet.cursor.chat') {
                 const {type} = data
                 let string, widget, url
+                const position = this.user.model.mouse.position
 
                 switch(type) {
 
@@ -81,6 +80,7 @@ class ExtensionView extends View {
                 case 'text':
                     this.publish(this.sessionId, 'add-widget', {
                         type,
+                        position,
                     })
                     break
                 case 'audio':
@@ -88,6 +88,7 @@ class ExtensionView extends View {
                     // RECORD AUDIO
                     this.publish(this.sessionId, 'add-widget', {
                         type,
+                        position,
                     })
                     break
                 case 'image':
@@ -95,6 +96,7 @@ class ExtensionView extends View {
                     // UPLOAD IMAGE
                     this.publish(this.sessionId, 'add-widget', {
                         type,
+                        position,
                     })
                     break
                 case 'embed':
@@ -104,6 +106,7 @@ class ExtensionView extends View {
                         this.publish(this.sessionId, 'add-widget', {
                             type,
                             url: url.href,
+                            position,
                         })
                     } catch (error) {
                         console.error(error)
@@ -210,6 +213,8 @@ class ExtensionView extends View {
     }
 
     onJoin () {
+        this.widgets = []
+
         this.audioContext = THREE.AudioContext.getContext()
         if (!this.audioContext.state !== 'running') {
             document.addEventListener('click', () => {

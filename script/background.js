@@ -99,6 +99,7 @@ chrome.contextMenus.create({
 // MODIFY WIDGETS
 chrome.contextMenus.create({
     title: 'Remove Widget',
+    contexts: ['all'],
     onclick: (event) => {
         const {pageUrl} = event
         chrome.tabs.query({active: true, url: pageUrl}, tabs => {

@@ -79,7 +79,7 @@ class SimplePeerView extends Croquet.View {
             console.log('stream', remoteStream)
         })
         this.peer.on('error', (error) => {
-            console.error(error)
+            console.log(error)
             this.disconnect()
         })
         this.peer.on('disconnect', () => {
