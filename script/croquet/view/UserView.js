@@ -59,8 +59,8 @@ class UserView extends Croquet.View {
     update () {
         if (this.myType === 'extension') {
             if (!this.isMyUser) {
-                this.cursorParent.style.left = `${this.model.position.x}px`
-                this.cursorParent.style.top = `${this.model.position.y}px`
+                this.cursorParent.style.left = `${this.model.mouse.position.x}px`
+                this.cursorParent.style.top = `${this.model.mouse.position.y}px`
             }
         }
         this.simplePeer.update()
