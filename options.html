@@ -1,0 +1,83 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script src='./script/croquet/croquet.min.js'></script>
+
+        <script src='./script/aframe/aframe.min.js'></script>
+
+        <script src='./script/facemesh/tfjs'></script>
+        <script src='./script/facemesh/tf-backend-wasm.js'></script>
+        <script src='./script/facemesh/facemesh'></script>
+
+        <script src='./script/simple-peer/simple-peer.min.js'></script>
+    </head>
+    
+    <style>
+        #video video, #output:not(.muted) video {
+            display: block;
+            transform: scaleX(-1);
+        }
+
+        video {
+            object-fit: cover;
+        }
+
+        #video button::before {content: 'hide'}
+        #video.muted button::before {content: 'show'}
+
+        #audio button::before {content: 'mute'}
+        #audio.muted button::before {content: 'unmute'}
+
+        a-scene {
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+
+    <body>
+        <h1>Croquet Cursor Chat</h1>
+
+        <div id='audio'>
+            <h2>Audio Input</h2>
+            <select></select>
+            <button></button>
+            <audio muted controls autoplay playsinline></audio>
+        </div>
+
+        <div id='video'>
+            <h2>Video Input</h2>
+            <select></select>
+            <button></button>
+            <video width='200' height='200' muted controls autoplay playsinline></video>
+        </div>
+        
+        <div id='facetracking'>
+            <h2>Face Tracking</h2>
+            <a-scene embedded vr-mode-ui="enabled: false">
+                <a-camera position="0 0 20" camera='fov: 60; zoom: 10;'></a-camera>
+                <a-entity id='monkey' scale='0.03 0.03 0.03' position='0 -0.1 0'>
+                    <a-entity position='0 -20 0' gltf-model='./assets/monkey_head/scene.gltf'></a-entity>
+                </a-entity>
+                <a-sky color='powderblue'></a-sky>
+            </a-scene>
+        </div>
+
+        <div id='output'>
+            <h2>Output</h2>
+            <video width='200' height='200' muted controls autoplay playsinline></video>
+        </div>
+
+        <div id='channel'>
+            <h2>Channel</h2>
+            <label class='username'>
+                <h3 style='display: inline'>username:</h3> <input type='text' value='zack'>
+            </label>
+            <label class='roomName'>
+                <h3 style='display: inline'>room name:</h3> <input type='text' value='room'>
+            </label>
+            <button>join</button>
+        </div>
+    </body>
+
+    <script src='./script/options/script.js' type='module'></script>
+</html>

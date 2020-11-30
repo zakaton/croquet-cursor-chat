@@ -1,0 +1,30 @@
+{
+    "name" : "Croquet Cursor Chat",
+    "version" : "1.0",
+    "manifest_version" : 2,
+
+    "options_page": "options.html",
+
+    "content_scripts" : [
+        {
+            "matches" : ["https://*/*?*croquet-cursor-chat-room=*croquet-cursor-chat-user=*"],
+            "js" : ["script/content/script.js"],
+            "run_at" : "document_end"
+        }
+    ],
+    "permissions" : ["activeTab", "tabs", "contextMenus"],
+    "background": {
+        "scripts": ["script/background.js"]
+    },
+
+    "omnibox": { "keyword" : "croquet" },
+
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+    
+    "web_accessible_resources" : ["*"],
+    "icons": {
+        "16": "icon.png",
+        "48": "icon.png",
+       "128": "icon.png"
+    }
+}

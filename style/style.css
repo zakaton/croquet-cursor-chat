@@ -1,0 +1,81 @@
+.croquet-cursor-chat.cursor {
+    position: absolute;
+    z-index: 100;
+
+    top: 0;
+    left: 0;
+    
+    user-select: none;
+    pointer-events: none;
+}
+
+.croquet-cursor-chat {
+    z-index: 100000;
+    font-size: 18px !important;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.croquet-cursor-chat.cursor .video {
+    position: relative;
+    
+    border-radius: 50%;
+    overflow: hidden;
+
+    left: 0px;
+    top: 40px;
+
+    width: 120px;
+    height: 120px;
+    box-shadow: 0 0 4px 1px black;
+
+    transition: top 0.5s, left 0.5s;
+}
+
+.croquet-cursor-chat.cursor.bottom .video {
+    top: -120px;
+}
+.croquet-cursor-chat.cursor.right .video {
+    left: -100px;
+}
+
+.croquet-cursor-chat.cursor video {
+    object-fit: cover;
+    width: inherit;
+    height: inherit;
+}
+.croquet-cursor-chat.cursor:not(.mute-video) video {
+    transform: scaleX(-1);
+}
+
+
+/* CHAT */
+.croquet-cursor-chat.chat {
+    position: fixed !important;
+
+    right: 10px;
+    bottom: 10px;
+
+    width: 300px;
+    max-height: 300px;
+
+    background-color: white;
+
+    border-radius: 10px;
+    padding: 5px;
+
+    overflow: none;
+
+    box-shadow: 1px 1px 7px 0px black;
+}
+
+.croquet-cursor-chat.chat .messages {
+
+}
+
+.croquet-cursor-chat.chat input {
+    width: 240px;
+}
+
+.croquet-cursor-chat.chat .message span.username {
+    font-weight: bold;
+}

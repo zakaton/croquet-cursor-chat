@@ -1,0 +1,10 @@
+Widgets
+    text
+    image
+    audio
+    embed
+
+audio
+    orientation
+    material
+    dimensions
