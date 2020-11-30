@@ -97,6 +97,7 @@ chrome.contextMenus.create({
 
 
 // MODIFY WIDGETS
+/*
 chrome.contextMenus.create({
     title: 'Remove Widget',
     contexts: ['all'],
@@ -110,6 +111,7 @@ chrome.contextMenus.create({
         })
     }
 })
+*/
 
 
 // SEARCHBOX
