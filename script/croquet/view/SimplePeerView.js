@@ -98,11 +98,11 @@ class SimplePeerView extends Croquet.View {
             this.matrix4.identity()
     
             const {innerWidth, innerHeight} = window
-            let x = this.userModel.mouse.position.x / innerWidth
+            let x = (window.scrollX - this.userModel.mouse.position.x) / innerWidth
             x *= 5
             x -= 2.5
     
-            let y = this.userModel.mouse.position.y / innerHeight
+            let y = (window.scrollY - this.userModel.mouse.position.y) / innerHeight
             y *= 5
             y -= 2.5
     
